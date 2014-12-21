@@ -1,16 +1,13 @@
 class Deck < Array
   attr_reader :deck
 
-  def initialize(initial)
+  def initialize(initial = [])
     @deck = initial.shuffle
   end
 
   def deal(count, hands)
     raise "Not enough cards to deal #{count} to each player." unless @deck.length >= (hands.length * count)
-    count.times do
-      hands.each{|hand| hand.draw }
-    end
-
+    count.times { hands.each{|hand| hand.draw } }
   end
 end
 
@@ -28,6 +25,10 @@ class Hand < Array
     @hand << @deck.pop
   end
 
+  def play(card)
+    raise 'You can\'t play or discard a card you don\'t have' unless @hand[card]
+    @hand.slice!(card)
+  end
 end
 
 # Initial hand should be 4 cards
