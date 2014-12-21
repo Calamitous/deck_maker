@@ -19,7 +19,7 @@ class Hand < Array
   attr_reader :deck
 
   def initialize(deck)
-    @deck = deck
+    @deck = deck.deck
     @hand = []
   end
 
