@@ -31,11 +31,11 @@ class Hand < Array
 end
 
 # Initial hand should be 4 cards
-initial_deck = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+@initial_deck = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
-deck = Deck.new(initial_deck)
-p1 = Hand.new(deck)
-p2 = Hand.new(deck)
+@deck = Deck.new(@initial_deck)
+@p1 = Hand.new(@deck)
+@p2 = Hand.new(@deck)
 
-deck.deal(4, [p1, p2])
+@deck.deal(4, [@p1, @p2])
 
