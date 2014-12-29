@@ -8,7 +8,7 @@ class Deck < Array
 
   def deal(count, hands)
     raise "Not enough cards to deal #{count} to each player." unless @deck.length >= (hands.length * count)
-    count.times { hands.each{|hand| hand.draw } }
+    count.times { hands.each{|hand| hand.draw(false) } }
   end
 
   def inspect
@@ -32,20 +32,20 @@ class Hand < Array
     @@player_count += 1
   end
 
-  def draw
+  def draw(show_following = true)
     raise "Deck is empty" unless @deck.length > 0
     @hand << @deck.pop
-    self.inspect
+    puts self.inspect if show_following
   end
 
-  def play(card)
+  def play(card, show_following = true)
     raise 'You can\'t play or discard a card you don\'t have' unless @hand[card]
     @hand.slice!(card)
-    self.inspect
+    puts self.inspect if show_following
   end
 
   def play_and_draw(card)
-    play(card)
+    play(card, false)
     draw
   end
 
