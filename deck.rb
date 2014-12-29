@@ -3,6 +3,7 @@ class Deck < Array
 
   def initialize(initial = [])
     @deck = initial.shuffle
+    puts "Deck created with #{@deck.size} cards."
   end
 
   def deal(count, hands)
@@ -34,11 +35,18 @@ class Hand < Array
   def draw
     raise "Deck is empty" unless @deck.length > 0
     @hand << @deck.pop
+    self.inspect
   end
 
   def play(card)
     raise 'You can\'t play or discard a card you don\'t have' unless @hand[card]
     @hand.slice!(card)
+    self.inspect
+  end
+
+  def play_and_draw(card)
+    play(card)
+    draw
   end
 
   def inspect
