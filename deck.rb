@@ -49,6 +49,19 @@ class Hand < Array
     draw
   end
 
+  def swap_cards(card1, card2, show_following = true)
+    raise 'You can\'t move a card you don\'t have' unless @hand[card1] && @hand[card2]
+    @hand[card1], @hand[card2] = @hand[card2], @hand[card1]
+    puts self.inspect if show_following
+  end
+
+  def move_card_to_bottom(card, show_following = true)
+    raise 'You can\'t move a card you don\'t have' unless @hand[card]
+    card = @hand.slice!(card)
+    @hand << card
+    puts self.inspect if show_following
+  end
+
   def inspect
     return_value = "#{@name}\n"
     self.hand.each_with_index do |card, index|
